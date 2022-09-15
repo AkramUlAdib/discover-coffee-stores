@@ -7,9 +7,8 @@ import cls from 'classnames';
 import styles from '../../styles/coffee-store.module.css';
 import { fetchCoffeeStores } from '../../lib/coffee-stores';
 
-export async function getStaticProps (staticProps){ 
+export async function getStaticProps ( { params } ){ 
     try {
-        const params = staticProps.params
         const coffeeStores = await fetchCoffeeStores();
         
         const findCoffeeStoreById = coffeeStores.find((coffeeStore) => {
@@ -47,7 +46,7 @@ const CoffeeStore = (props) => {
         )
     }
 
-    const { address, name, neighborhood, imgUrl } = props.coffeeStore;
+    const { location, address, name, neighborhood, imgUrl } = props.coffeeStore;
 
     const handleUpvoteButton = () => {
         console.log('handle upvote')
@@ -77,12 +76,12 @@ const CoffeeStore = (props) => {
                 <div className={cls("glass", styles.col2)}>
                     <div className={styles.iconWrapper}>
                         <Image src="/static/icons/places.svg" width="24" height="24" />
-                        <p className={styles.text}>{address}</p>
+                        <p className={styles.text}>{location.address}</p>
                     </div>
 
                     <div className={styles.iconWrapper}>
                         <Image src="/static/icons/nearMe.svg" width="24" height="24" />
-                        <p className={styles.text}>{neighborhood}</p>
+                        <p className={styles.text}>{location.neighborhood}</p>
                     </div>
                 
                     <div className={styles.iconWrapper}>
