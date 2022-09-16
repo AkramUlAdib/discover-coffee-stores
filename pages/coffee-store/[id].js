@@ -8,8 +8,8 @@ import styles from '../../styles/coffee-store.module.css';
 import { fetchCoffeeStores } from '../../lib/coffee-stores';
 
 export async function getStaticProps ( { params } ){ 
-    try {
         const coffeeStores = await fetchCoffeeStores();
+        
         
         const findCoffeeStoreById = coffeeStores.find((coffeeStore) => {
             return coffeeStore.fsq_id.toString() === params.id;
@@ -20,9 +20,7 @@ export async function getStaticProps ( { params } ){
             coffeeStore: findCoffeeStoreById ? findCoffeeStoreById : {},
         }
     }
-    } catch (err) {
-        console.log(err)
-    }
+    
 } 
 export async function getStaticPaths() {
     const coffeeStores = await fetchCoffeeStores();
@@ -32,7 +30,7 @@ export async function getStaticPaths() {
         }
     })
     return {
-        paths: paths,
+        paths,
         fallback:true,
     }
 }
@@ -47,6 +45,7 @@ const CoffeeStore = (props) => {
     }
 
     const { location, address, name, neighborhood, imgUrl } = props.coffeeStore;
+    console.log('coffee', props.coffeeStore)
 
     const handleUpvoteButton = () => {
         console.log('handle upvote')
