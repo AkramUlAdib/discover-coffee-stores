@@ -10,7 +10,6 @@ import { fetchCoffeeStores } from '../../lib/coffee-stores';
 export async function getStaticProps ( { params } ){ 
         const coffeeStores = await fetchCoffeeStores();
         
-        
         const findCoffeeStoreById = coffeeStores.find((coffeeStore) => {
             return coffeeStore.fsq_id.toString() === params.id;
     })
@@ -59,7 +58,7 @@ const CoffeeStore = (props) => {
             <div className={styles.container}>
                 <div className={styles.col1}>
                     <div className={styles.backToHomeLink}>
-                        <Link href='/'><a>back to home</a></Link>
+                        <Link href='/'><a><h3>back to home</h3></a></Link>
                     </div>
                     <div className={styles.nameWrapper}>
                         <h1 className={styles.name}>{name}</h1>
